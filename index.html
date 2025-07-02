@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HASHGRID NETWORKS - Matrix</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            overflow: hidden;
+            font-family: 'Orbitron', monospace;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .matrix-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        canvas {
+            display: block;
+            background: #000;
+            /* Force hardware acceleration */
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 60px 80px;
+            border-radius: 20px;
+            border: 2px solid #00ff41;
+            box-shadow:
+                0 0 30px rgba(0, 255, 65, 0.3),
+                inset 0 0 30px rgba(0, 255, 65, 0.1);
+            /* Simplified backdrop filter for better Safari performance */
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+
+        .main-title {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #00ff41;
+            text-shadow:
+                0 0 10px #00ff41,
+                0 0 20px #00ff41,
+                0 0 30px #00ff41;
+            letter-spacing: 8px;
+            margin-bottom: 10px;
+            animation: glow 2s ease-in-out infinite alternate;
+            /* Optimize for Safari */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .subtitle {
+            font-size: 2.2rem;
+            font-weight: 400;
+            color: #66ff66;
+            letter-spacing: 12px;
+            text-shadow:
+                0 0 5px #66ff66,
+                0 0 10px #66ff66;
+            animation: pulse 3s ease-in-out infinite;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow:
+                    0 0 10px #00ff41,
+                    0 0 20px #00ff41,
+                    0 0 30px #00ff41;
+            }
+            to {
+                text-shadow:
+                    0 0 15px #00ff41,
+                    0 0 25px #00ff41,
+                    0 0 35px #00ff41,
+                    0 0 45px #00ff41;
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.8;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .logo-container {
+                padding: 40px 30px;
+            }
+            .main-title {
+                font-size: 2.5rem;
+                letter-spacing: 4px;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+                letter-spacing: 6px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-container">
+        <canvas id="matrix"></canvas>
+    </div>
+
+    <div class="logo-container">
+        <div class="main-title">HASHGRID</div>
+        <div class="subtitle">NETWORKS</div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        
+        // Performance optimizations
+        let animationId;
+        let lastTime = 0;
+        const targetFPS = 30; // Reduced from ~20fps to 30fps for better performance
+        const frameDelay = 1000 / targetFPS;
+        
+        // Optimize canvas settings
+        ctx.imageSmoothingEnabled = false;
+        ctx.webkitImageSmoothingEnabled = false;
+
+        // Set canvas size - simplified for better cross-browser compatibility
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            // Recalculate columns after resize
+            setupMatrix();
+        }
+
+        // Matrix setup
+        let matrixChars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        let fontSize = 14;
+        let columns, drops;
+        
+        function setupMatrix() {
+            columns = Math.floor(canvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * canvas.height;
+            }
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // Pre-calculate some values for better performance
+        const trailAlpha = 'rgba(0, 0, 0, 0.08)'; // Slightly higher for better trail effect
+        const fontString = fontSize + 'px monospace';
+        
+        // Character cache for better performance
+        const charCache = matrixChars.split('');
+        const charCacheLength = charCache.length;
+
+        function drawMatrix(currentTime) {
+            // Frame rate limiting
+            if (currentTime - lastTime < frameDelay) {
+                animationId = requestAnimationFrame(drawMatrix);
+                return;
+            }
+            lastTime = currentTime;
+            
+            // Create trailing effect with optimized alpha
+            ctx.fillStyle = trailAlpha;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Set font once
+            ctx.font = fontString;
+
+            // Batch character drawing for better performance
+            ctx.fillStyle = '#00ff41';
+            
+            for (let i = 0; i < drops.length; i++) {
+                // Use cached character selection
+                const char = charCache[Math.floor(Math.random() * charCacheLength)];
+                
+                // Simplified color - remove gradient for better Safari performance
+                const intensity = Math.max(0.3, 1 - (drops[i] % 100) / 100);
+                ctx.fillStyle = `rgba(0, 255, 65, ${intensity})`;
+                
+                ctx.fillText(char, i * fontSize, drops[i]);
+
+                // Optimized reset logic
+                if (drops[i] > canvas.height && Math.random() > 0.975) {
+                    drops[i] = -fontSize;
+                }
+
+                // Move drop down
+                drops[i] += 0.8; // Slightly slower for better visual effect
+            }
+
+            animationId = requestAnimationFrame(drawMatrix);
+        }
+
+        // Start animation
+        animationId = requestAnimationFrame(drawMatrix);
+
+        // Optimized mouse interaction with throttling
+        let mouseThrottleTimer;
+        canvas.addEventListener('mousemove', (e) => {
+            if (mouseThrottleTimer) return;
+            
+            mouseThrottleTimer = setTimeout(() => {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                // Add matrix drops near mouse with reduced intensity
+                const col = Math.floor(x / fontSize);
+                if (col >= 0 && col < drops.length && Math.random() > 0.7) {
+                    drops[col] = Math.max(0, y - 50);
+                }
+                
+                mouseThrottleTimer = null;
+            }, 50); // Throttle mouse events
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        });
+
+        // Pause animation when page is not visible (Safari optimization)
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+            } else {
+                animationId = requestAnimationFrame(drawMatrix);
+            }
+        });
+    </script>
+</body>
+</html>
