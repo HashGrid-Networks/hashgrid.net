@@ -37,9 +37,16 @@
         canvas {
             display: block;
             background: #000;
-            /* Force hardware acceleration */
+            /* Safari optimizations */
             transform: translateZ(0);
             will-change: transform;
+            /* Disable context menu on touch devices */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         .content-container {
@@ -56,16 +63,16 @@
         }
 
         .logo-container {
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             padding: 60px 80px;
             border-radius: 20px;
             border: 2px solid #00ff41;
             box-shadow:
                 0 0 30px rgba(0, 255, 65, 0.3),
                 inset 0 0 30px rgba(0, 255, 65, 0.1);
-            /* Simplified backdrop filter for better Safari performance */
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            /* Optimize backdrop filter for Safari */
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
         }
 
         .main-title {
@@ -96,15 +103,15 @@
         }
 
         .announcement {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             padding: 25px 40px;
             border-radius: 15px;
             border: 2px solid #ff6600;
             box-shadow:
                 0 0 25px rgba(255, 102, 0, 0.4),
                 inset 0 0 20px rgba(255, 102, 0, 0.1);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             max-width: 800px;
         }
 
@@ -122,15 +129,15 @@
         }
 
         .video-container {
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 0, 0, 0.95);
             padding: 20px;
             border-radius: 15px;
             border: 2px solid #00ff41;
             box-shadow:
                 0 0 25px rgba(0, 255, 65, 0.3),
                 inset 0 0 20px rgba(0, 255, 65, 0.1);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             max-width: 800px;
         }
 
@@ -270,6 +277,9 @@
             }
             body {
                 cursor: default; /* Show cursor on mobile */
+                /* Prevent bounce scrolling on iOS */
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: none;
             }
             .social-links {
                 gap: 15px;
@@ -353,12 +363,14 @@
         // Performance optimizations
         let animationId;
         let lastTime = 0;
-        const targetFPS = 30;
+        const targetFPS = 60; // Increased for smoother experience
         const frameDelay = 1000 / targetFPS;
         
-        // Optimize canvas settings
+        // Optimize canvas settings for Safari
         ctx.imageSmoothingEnabled = false;
         ctx.webkitImageSmoothingEnabled = false;
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.msImageSmoothingEnabled = false;
 
         // Mouse tracking
         let mouseX = 0;
@@ -392,7 +404,6 @@
         window.addEventListener('resize', resizeCanvas);
 
         // Pre-calculate values for performance
-        const trailAlpha = 'rgba(0, 0, 0, 0.08)';
         const fontString = fontSize + 'px monospace';
         const charCache = matrixChars.split('');
         const charCacheLength = charCache.length;
@@ -430,32 +441,32 @@
         }
 
         function drawMatrix(currentTime) {
-            // Frame rate limiting
-            if (currentTime - lastTime < frameDelay) {
+            // Adaptive frame rate limiting for Safari
+            const now = performance.now();
+            if (now - lastTime < frameDelay) {
                 animationId = requestAnimationFrame(drawMatrix);
                 return;
             }
-            lastTime = currentTime;
+            lastTime = now;
             
-            // Create trailing effect
-            ctx.fillStyle = trailAlpha;
+            // Create trailing effect with optimized alpha
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.06)'; // Slightly more transparent for better performance
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
             // Set font once
             ctx.font = fontString;
 
-            // Draw main matrix drops
-            ctx.fillStyle = '#00ff41';
+            // Draw main matrix drops with optimized rendering
             for (let i = 0; i < drops.length; i++) {
                 const char = charCache[Math.floor(Math.random() * charCacheLength)];
-                const intensity = Math.max(0.3, 1 - (drops[i] % 100) / 100);
+                const intensity = Math.max(0.4, 1 - (drops[i] % 120) / 120);
                 ctx.fillStyle = `rgba(0, 255, 65, ${intensity})`;
                 ctx.fillText(char, i * fontSize, drops[i]);
 
                 if (drops[i] > canvas.height && Math.random() > 0.975) {
                     drops[i] = -fontSize;
                 }
-                drops[i] += 0.8;
+                drops[i] += 1; // Slightly faster drop speed
             }
 
             // Update and draw cursor drops
@@ -464,37 +475,39 @@
                 return drop.draw();
             });
 
-            // Draw mouse trail effect
+            // Draw mouse trail effect with better performance
             if (mouseTrail.length > 1) {
+                ctx.globalCompositeOperation = 'screen'; // Blend mode for better performance
                 for (let i = 0; i < mouseTrail.length - 1; i++) {
-                    const alpha = (i / mouseTrail.length) * 0.5;
-                    const size = (i / mouseTrail.length) * 8 + 2;
+                    const alpha = (i / mouseTrail.length) * 0.4;
+                    const size = (i / mouseTrail.length) * 6 + 2;
                     
                     ctx.fillStyle = `rgba(0, 255, 65, ${alpha})`;
                     ctx.beginPath();
                     ctx.arc(mouseTrail[i].x, mouseTrail[i].y, size, 0, Math.PI * 2);
                     ctx.fill();
                 }
+                ctx.globalCompositeOperation = 'source-over'; // Reset blend mode
             }
 
-            // Draw cursor glow
+            // Draw cursor glow with optimized gradient
             if (mouseTrail.length > 0) {
                 const latest = mouseTrail[mouseTrail.length - 1];
-                const gradient = ctx.createRadialGradient(latest.x, latest.y, 0, latest.x, latest.y, 20);
-                gradient.addColorStop(0, 'rgba(0, 255, 65, 0.8)');
-                gradient.addColorStop(0.5, 'rgba(0, 255, 65, 0.3)');
+                const gradient = ctx.createRadialGradient(latest.x, latest.y, 0, latest.x, latest.y, 15);
+                gradient.addColorStop(0, 'rgba(0, 255, 65, 0.6)');
+                gradient.addColorStop(0.7, 'rgba(0, 255, 65, 0.2)');
                 gradient.addColorStop(1, 'rgba(0, 255, 65, 0)');
                 
                 ctx.fillStyle = gradient;
                 ctx.beginPath();
-                ctx.arc(latest.x, latest.y, 20, 0, Math.PI * 2);
+                ctx.arc(latest.x, latest.y, 15, 0, Math.PI * 2);
                 ctx.fill();
 
                 // Draw cursor character
                 ctx.fillStyle = '#ffffff';
-                ctx.font = '16px monospace';
-                const cursorChar = charCache[Math.floor(Date.now() / 200) % charCacheLength];
-                ctx.fillText(cursorChar, latest.x - 4, latest.y + 4);
+                ctx.font = '14px monospace';
+                const cursorChar = charCache[Math.floor(Date.now() / 150) % charCacheLength];
+                ctx.fillText(cursorChar, latest.x - 3, latest.y + 3);
                 ctx.font = fontString; // Reset font
             }
 
@@ -517,37 +530,57 @@
             mouseTrail = mouseTrail.filter(point => now - point.time < 500);
         }
 
-        // Mouse event listeners
-        canvas.addEventListener('mousemove', (e) => {
+        // Mouse event listeners with improved mobile support
+        document.addEventListener('mousemove', (e) => {
             updateMousePosition(e);
-            
-            // Create cursor drops around mouse position
-            if (Math.random() < 0.7) {
-                const offsetX = (Math.random() - 0.5) * 60;
-                const offsetY = (Math.random() - 0.5) * 40;
-                cursorDrops.push(new CursorDrop(mouseX + offsetX, mouseY + offsetY));
-            }
-            
-            // Affect nearby matrix columns
-            const col = Math.floor(mouseX / fontSize);
-            const range = 3;
-            for (let i = Math.max(0, col - range); i < Math.min(columns, col + range + 1); i++) {
-                if (Math.random() > 0.8) {
-                    drops[i] = Math.max(0, mouseY - Math.random() * 100);
-                }
-            }
+            createCursorEffects(e.clientX, e.clientY);
         });
 
-        // Handle mouse leave to clear trail
-        canvas.addEventListener('mouseleave', () => {
-            mouseTrail = [];
-        });
-
-        // Touch support for mobile
-        canvas.addEventListener('touchmove', (e) => {
+        document.addEventListener('touchmove', (e) => {
             e.preventDefault();
             const touch = e.touches[0];
             updateMousePosition(touch);
+            createCursorEffects(touch.clientX, touch.clientY);
+        }, { passive: false });
+
+        document.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            updateMousePosition(touch);
+            createCursorEffects(touch.clientX, touch.clientY);
+        });
+
+        // Unified cursor effects function
+        function createCursorEffects(x, y) {
+            // Create cursor drops around mouse/touch position
+            if (Math.random() < 0.7) {
+                const offsetX = (Math.random() - 0.5) * 60;
+                const offsetY = (Math.random() - 0.5) * 40;
+                cursorDrops.push(new CursorDrop(x + offsetX, y + offsetY));
+            }
+            
+            // Affect nearby matrix columns
+            const col = Math.floor(x / fontSize);
+            const range = 3;
+            for (let i = Math.max(0, col - range); i < Math.min(columns, col + range + 1); i++) {
+                if (Math.random() > 0.8) {
+                    drops[i] = Math.max(0, y - Math.random() * 100);
+                }
+            }
+        }
+
+        // Handle mouse leave to clear trail
+        document.addEventListener('mouseleave', () => {
+            mouseTrail = [];
+        });
+
+        // Handle touch end to gradually clear trail
+        document.addEventListener('touchend', () => {
+            // Don't immediately clear trail on touch end for better mobile experience
+            setTimeout(() => {
+                if (mouseTrail.length > 0) {
+                    mouseTrail = mouseTrail.slice(-5); // Keep last 5 points
+                }
+            }, 1000);
         });
 
         // Start animation
