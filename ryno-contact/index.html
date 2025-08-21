@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraHash Stack - Revolutionary Bitcoin Mining Platform</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/118c1c0d-018f-4cac-a3be-09df968bb482.png" alt="HashGrid & Ryno Combined Logo" class="header__logo">
+                <nav class="header__nav">
+                    <a href="#calculator" class="header__nav-link">ROI Calculator</a>
+                    <a href="#features" class="header__nav-link">Features</a>
+                    <a href="#contact" class="header__nav-link">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <div class="hero__text">
+                    <h1 class="hero__title">TerraHash Stack</h1>
+                    <p class="hero__subtitle">The Revolutionary Bitcoin Mining Platform</p>
+                    <p class="hero__description">Experience up to 50% energy cost reduction, 40% cooling savings, and 33% hash rate increase with our AI-powered, liquid-cooled mining solution.</p>
+                    <div class="hero__partnership">
+                        <span class="partnership-badge">Ryno Holdings - Exclusive Sales Partner</span>
+                    </div>
+                    <div class="hero__cta">
+                        <a href="#calculator" class="btn btn--primary btn--lg">Calculate Your ROI</a>
+                        <a href="#contact" class="btn btn--outline btn--lg">Schedule Consultation</a>
+                    </div>
+                </div>
+                <div class="hero__image">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/c0cdbb9a-6639-4723-b7b8-f5bbcff75af6.png" alt="TerraHash Stack Benefits Overview" class="hero__img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section id="calculator" class="calculator-section">
+        <div class="container">
+            <div class="calculator">
+                <h2 class="calculator__title">ROI Calculator</h2>
+                <p class="calculator__subtitle">See how much you can save with TerraHash Stack</p>
+                
+                <div class="calculator__grid">
+                    <div class="calculator__inputs">
+                        <div class="form-group">
+                            <label class="form-label">Initial Investment</label>
+                            <div class="slider-container">
+                                <input type="range" id="investment" class="slider" min="50000" max="10000000" step="50000" value="500000">
+                                <span class="slider-value" id="investment-value">$500,000</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Electricity Cost (per kWh)</label>
+                            <div class="slider-container">
+                                <input type="range" id="electricity" class="slider" min="0.02" max="0.15" step="0.01" value="0.08">
+                                <span class="slider-value" id="electricity-value">$0.08</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Number of Mining Units</label>
+                            <div class="slider-container">
+                                <input type="range" id="units" class="slider" min="1" max="100" step="1" value="10">
+                                <span class="slider-value" id="units-value">10</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Current Cooling Method</label>
+                            <select id="cooling" class="form-control">
+                                <option value="none">None</option>
+                                <option value="air">Air Cooling</option>
+                                <option value="basic-liquid">Basic Liquid Cooling</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="calculator__results">
+                        <div class="result-card">
+                            <h3>Monthly Results</h3>
+                            <div class="result-item">
+                                <span>Projected Revenue:</span>
+                                <span id="monthly-revenue" class="result-value">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Energy Savings (50%):</span>
+                                <span id="energy-savings" class="result-value success">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Cooling Savings (40%):</span>
+                                <span id="cooling-savings" class="result-value success">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>Total Monthly Profit:</span>
+                                <span id="monthly-profit" class="result-value primary">$0</span>
+                            </div>
+                            <div class="result-item">
+                                <span>ROI Timeline:</span>
+                                <span id="roi-timeline" class="result-value">0 months</span>
+                            </div>
+                            <div class="result-item">
+                                <span>5-Year Profit:</span>
+                                <span id="five-year-profit" class="result-value primary">$0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="comparison-section">
+        <div class="container">
+            <h2 class="section-title">Traditional Mining vs TerraHash Stack</h2>
+            <div class="comparison-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Traditional Mining</th>
+                            <th>TerraHash Stack</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Energy Costs</td>
+                            <td><span class="comparison-bad">High - Full market rate</span></td>
+                            <td><span class="comparison-good">50% reduction with renewable integration</span></td>
+                        </tr>
+                        <tr>
+                            <td>Cooling Efficiency</td>
+                            <td><span class="comparison-bad">Air cooling - High energy use</span></td>
+                            <td><span class="comparison-good">Direct-to-chip liquid - 40% cost reduction</span></td>
+                        </tr>
+                        <tr>
+                            <td>Hash Rate Performance</td>
+                            <td><span class="comparison-neutral">Standard performance</span></td>
+                            <td><span class="comparison-good">33% increase with optimal cooling</span></td>
+                        </tr>
+                        <tr>
+                            <td>Hardware Lifespan</td>
+                            <td><span class="comparison-bad">Standard wear from heat</span></td>
+                            <td><span class="comparison-good">30% extension with better cooling</span></td>
+                        </tr>
+                        <tr>
+                            <td>Automation Level</td>
+                            <td><span class="comparison-bad">Manual monitoring & optimization</span></td>
+                            <td><span class="comparison-good">AI-powered 24/7 automation</span></td>
+                        </tr>
+                        <tr>
+                            <td>Environmental Impact</td>
+                            <td><span class="comparison-bad">High carbon footprint</span></td>
+                            <td><span class="comparison-good">Carbon-neutral with renewables</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Features -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Explore TerraHash Stack Features</h2>
+            <div class="features-tabs">
+                <nav class="tabs-nav">
+                    <button class="tab-btn active" data-tab="renewable">Renewable Energy</button>
+                    <button class="tab-btn" data-tab="cooling">Liquid Cooling</button>
+                    <button class="tab-btn" data-tab="ai">AI Automation</button>
+                    <button class="tab-btn" data-tab="scalability">Scalability</button>
+                </nav>
+
+                <div class="tabs-content">
+                    <div class="tab-pane active" id="renewable">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>Renewable Energy Integration</h3>
+                                <p>Harness the power of renewable energy sources for sustainable and cost-effective mining operations.</p>
+                                <ul class="feature-list">
+                                    <li>🔥 Trapped natural gas utilization</li>
+                                    <li>☀️ Solar/wind/hydro optimization</li>
+                                    <li>⚡ Smart grid integration</li>
+                                    <li>🌱 Carbon-neutral operations</li>
+                                </ul>
+                            </div>
+                            <div class="feature-image">
+                                <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/6d12c939-894d-44c8-b946-e693b4565c2b.png" alt="TerraHash Stack Features" class="feature-img">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="cooling">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>Direct-to-Chip Liquid Cooling</h3>
+                                <p>Revolutionary cooling technology that maximizes performance while minimizing costs and space requirements.</p>
+                                <ul class="feature-list">
+                                    <li>❄️ 40% cooling cost reduction</li>
+                                    <li>🔇 Near-silent operation</li>
+                                    <li>⏱️ 30% hardware life extension</li>
+                                    <li>📦 84% space reduction</li>
+                                </ul>
+                            </div>
+                            <div class="feature-metrics">
+                                <div class="metric-card">
+                                    <div class="metric-value">40%</div>
+                                    <div class="metric-label">Cost Reduction</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value">84%</div>
+                                    <div class="metric-label">Space Savings</div>
+                                </div>
+                                <div class="metric-card">
+                                    <div class="metric-value">30%</div>
+                                    <div class="metric-label">Lifespan Increase</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="ai">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>AI-Powered Automation</h3>
+                                <p>Advanced artificial intelligence continuously optimizes your mining operation for maximum profitability.</p>
+                                <ul class="feature-list">
+                                    <li>🤖 24/7 performance optimization</li>
+                                    <li>🔧 Predictive maintenance</li>
+                                    <li>💰 Automated profit strategies</li>
+                                    <li>📊 Real-time market analysis</li>
+                                </ul>
+                            </div>
+                            <div class="ai-benefits">
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">🎯</div>
+                                    <div class="benefit-text">
+                                        <h4>Smart Optimization</h4>
+                                        <p>AI adjusts parameters in real-time for peak efficiency</p>
+                                    </div>
+                                </div>
+                                <div class="benefit-item">
+                                    <div class="benefit-icon">⚡</div>
+                                    <div class="benefit-text">
+                                        <h4>Instant Response</h4>
+                                        <p>Immediate adaptation to market conditions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane" id="scalability">
+                        <div class="feature-content">
+                            <div class="feature-text">
+                                <h3>Scalable Solutions</h3>
+                                <p>Choose the perfect package for your operation size and growth plans.</p>
+                            </div>
+                            <div class="packages-grid">
+                                <div class="package-card">
+                                    <h4>Starter</h4>
+                                    <div class="package-price">$75K-$150K</div>
+                                    <div class="package-hashrate">1-5 PH/s</div>
+                                    <p>Perfect for new miners entering the space</p>
+                                </div>
+                                <div class="package-card featured">
+                                    <h4>Professional</h4>
+                                    <div class="package-price">$150K-$500K</div>
+                                    <div class="package-hashrate">5-25 PH/s</div>
+                                    <p>Ideal for growing operations</p>
+                                </div>
+                                <div class="package-card">
+                                    <h4>Enterprise</h4>
+                                    <div class="package-price">$500K+</div>
+                                    <div class="package-hashrate">25+ PH/s</div>
+                                    <p>For large-scale mining facilities</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Schedule Your Consultation</h2>
+                    <p>Ready to revolutionize your mining operation? Connect with Ryno Holdings, the exclusive sales partner for TerraHash Stack.</p>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <strong>Phone:</strong> 1-800-RYNO-MINE
+                        </div>
+                        <div class="contact-item">
+                            <strong>Email:</strong> terrahash@rynoholdings.com
+                        </div>
+                        <div class="contact-item">
+                            <strong>Website:</strong> rynoholdings.com/terrahash
+                        </div>
+                    </div>
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/5bec78c7-010d-4da1-a1a3-903c80a85e2d.png" alt="Ryno TerraHash Sales Advertisement" class="contact-ad">
+                </div>
+                
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Current Mining Operation Size</label>
+                        <select class="form-control" id="operation-size">
+                            <option value="">Select size...</option>
+                            <option value="none">No current operation</option>
+                            <option value="small">Small (under 1 PH/s)</option>
+                            <option value="medium">Medium (1-10 PH/s)</option>
+                            <option value="large">Large (10+ PH/s)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Interest Level</label>
+                        <select class="form-control" id="interest-level">
+                            <option value="exploring">Just exploring options</option>
+                            <option value="serious">Serious consideration</option>
+                            <option value="ready">Ready to purchase</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your mining goals and any specific questions..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width">Schedule Consultation</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal hidden" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Consultation Scheduled!</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Thank you for your interest in TerraHash Stack. A Ryno Holdings representative will contact you within 24 hours to schedule your personalized consultation.</p>
+                <p><strong>Next Steps:</strong></p>
+                <ul>
+                    <li>Review your current mining setup</li>
+                    <li>Prepare questions about TerraHash Stack</li>
+                    <li>Consider your investment timeline</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/98c45ca7-f45f-4259-8d94-35128097c274.png" alt="HashGrid & Ryno Partnership" class="footer-img">
+                </div>
+                <div class="footer-text">
+                    <p>&copy; 2025 HashGrid Networks & Ryno Holdings. TerraHash Stack - Revolutionary Bitcoin Mining Platform.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
