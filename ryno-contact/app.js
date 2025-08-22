@@ -3,12 +3,12 @@
 // Application data
 const appData = {
   companyInfo: {
-    partner: "Ryno Holdings",
+    partner: "Ryno",
     developer: "HashGrid Networks",
     product: "TerraHash Stack",
     phone: "1-800-RYNO-MINE",
-    email: "terrahash@rynoholdings.com",
-    website: "rynoholdings.com/terrahash"
+    email: "terrahash@ryno.com",
+    website: "ryno.com/terrahash"
   },
   savings: {
     energyCostReduction: 0.5,
@@ -239,54 +239,81 @@ function initializeTabs() {
   console.log('Tabs initialized successfully');
 }
 
-// Form Handling
+// Form Handling - Fixed version
 function initializeForm() {
-  if (!contactForm) {
-    return;
-  }
+  // Wait for elements to be available
+  setTimeout(() => {
+    const form = document.getElementById('contact-form');
+    const nameField = document.getElementById('name');
+    const emailField = document.getElementById('email');
+    const phoneField = document.getElementById('phone');
+    const operationSizeField = document.getElementById('operation-size');
+    const interestLevelField = document.getElementById('interest-level');
+    const messageField = document.getElementById('message');
 
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    console.log('Form submission started');
-    
-    // Get form data
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const operationSize = document.getElementById('operation-size').value;
-    const interestLevel = document.getElementById('interest-level').value;
-    const message = document.getElementById('message').value;
-    
-    // Basic validation
-    if (!name.trim() || !email.trim()) {
-      alert('Please fill in all required fields.');
+    if (!form) {
+      console.error('Contact form not found');
       return;
     }
-    
-    if (!isValidEmail(email)) {
-      alert('Please enter a valid email address.');
-      return;
+
+    // Ensure dropdowns are properly initialized
+    if (operationSizeField) {
+      operationSizeField.style.pointerEvents = 'auto';
+      operationSizeField.style.cursor = 'pointer';
     }
     
-    // Log form data (simulate form submission)
-    console.log('Form submitted:', {
-      name: name,
-      email: email,
-      phone: phone,
-      operationSize: operationSize,
-      interestLevel: interestLevel,
-      message: message
+    if (interestLevelField) {
+      interestLevelField.style.pointerEvents = 'auto';
+      interestLevelField.style.cursor = 'pointer';
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      console.log('Form submission started');
+      
+      // Get form data with null checks
+      const name = nameField ? nameField.value.trim() : '';
+      const email = emailField ? emailField.value.trim() : '';
+      const phone = phoneField ? phoneField.value.trim() : '';
+      const operationSize = operationSizeField ? operationSizeField.value : '';
+      const interestLevel = interestLevelField ? interestLevelField.value : '';
+      const message = messageField ? messageField.value.trim() : '';
+      
+      // Basic validation
+      if (!name || !email) {
+        alert('Please fill in all required fields (Name and Email).');
+        return false;
+      }
+      
+      if (!isValidEmail(email)) {
+        alert('Please enter a valid email address.');
+        return false;
+      }
+      
+      // Log form data (simulate form submission)
+      console.log('Form submitted with data:', {
+        name: name,
+        email: email,
+        phone: phone,
+        operationSize: operationSize,
+        interestLevel: interestLevel,
+        message: message,
+        timestamp: new Date().toISOString()
+      });
+      
+      // Show success modal
+      showModal();
+      
+      // Reset form
+      form.reset();
+      
+      return false;
     });
     
-    // Show success modal
-    showModal();
-    
-    // Reset form
-    contactForm.reset();
-  });
-  
-  console.log('Form initialized successfully');
+    console.log('Form initialized successfully');
+  }, 500);
 }
 
 function isValidEmail(email) {
@@ -294,57 +321,87 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-// Modal Functions
+// Modal Functions - Enhanced version
 function showModal() {
-  if (!successModal) {
+  const modal = document.getElementById('success-modal');
+  
+  if (!modal) {
     console.error('Success modal not found');
     return;
   }
   
-  console.log('Showing modal');
-  successModal.classList.remove('hidden');
-  successModal.classList.add('show');
+  console.log('Showing success modal');
+  
+  // Remove hidden class and add show class
+  modal.classList.remove('hidden');
+  modal.classList.add('show');
+  
+  // Prevent body scrolling
   document.body.style.overflow = 'hidden';
+  
+  // Focus management
+  modal.setAttribute('aria-hidden', 'false');
 }
 
 function hideModal() {
-  if (!successModal) {
+  const modal = document.getElementById('success-modal');
+  
+  if (!modal) {
     return;
   }
   
   console.log('Hiding modal');
-  successModal.classList.remove('show');
-  successModal.classList.add('hidden');
+  
+  // Add hidden class and remove show class
+  modal.classList.add('hidden');
+  modal.classList.remove('show');
+  
+  // Restore body scrolling
   document.body.style.overflow = 'auto';
+  
+  // Focus management
+  modal.setAttribute('aria-hidden', 'true');
 }
 
 function initializeModal() {
-  if (!successModal || !modalClose) {
-    return;
-  }
+  // Wait for modal to be available
+  setTimeout(() => {
+    const modal = document.getElementById('success-modal');
+    const closeButton = document.getElementById('modal-close');
 
-  // Close button click
-  modalClose.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    hideModal();
-  });
-  
-  // Click outside modal to close
-  successModal.addEventListener('click', (e) => {
-    if (e.target === successModal) {
-      hideModal();
+    if (!modal) {
+      console.error('Modal elements not found');
+      return;
     }
-  });
-  
-  // Escape key to close
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && successModal.classList.contains('show')) {
-      hideModal();
+
+    // Set initial state
+    modal.setAttribute('aria-hidden', 'true');
+
+    // Close button click
+    if (closeButton) {
+      closeButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        hideModal();
+      });
     }
-  });
-  
-  console.log('Modal initialized successfully');
+    
+    // Click outside modal to close
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        hideModal();
+      }
+    });
+    
+    // Escape key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('show')) {
+        hideModal();
+      }
+    });
+    
+    console.log('Modal initialized successfully');
+  }, 500);
 }
 
 // Smooth Scrolling for Navigation
@@ -412,7 +469,7 @@ function initializeApp() {
   // Initialize DOM elements first
   initializeDOMElements();
   
-  // Initialize all components
+  // Initialize all components with proper timing
   initializeSliders();
   initializeTabs();
   initializeForm();
@@ -421,7 +478,7 @@ function initializeApp() {
   initializeScrollAnimations();
   
   // Initial calculations
-  updateCalculations();
+  setTimeout(updateCalculations, 200);
   
   // Add loading animation completion
   document.body.style.opacity = '1';
