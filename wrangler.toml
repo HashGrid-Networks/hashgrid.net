@@ -1,0 +1,29 @@
+# Cloudflare Workers configuration for hashgrid.net
+# https://developers.cloudflare.com/workers/
+
+name = "hashgrid-net-worker"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# Route configuration - handles both www and non-www domains
+routes = [
+  { pattern = "hashgrid.net/*", zone_name = "hashgrid.net" },
+  { pattern = "www.hashgrid.net/*", zone_name = "hashgrid.net" }
+]
+
+# Production environment
+[env.production]
+name = "hashgrid-net-worker-production"
+routes = [
+  { pattern = "hashgrid.net/*", zone_name = "hashgrid.net" },
+  { pattern = "www.hashgrid.net/*", zone_name = "hashgrid.net" }
+]
+
+# Development environment - uses workers.dev for testing
+[env.development]
+name = "hashgrid-net-worker-dev"
+workers_dev = true
+
+# Environment variables (if needed)
+# [vars]
+# ENVIRONMENT = "production"
