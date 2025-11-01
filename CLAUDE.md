@@ -8,7 +8,7 @@ This is a static website for HashGrid Networks (hashgrid.net) - a Bitcoin mining
 - Matrix-style animated background (canvas-based)
 - Interactive mouse/touch cursor effects
 - Embedded video presentation
-- Social media links (GitHub, Nostr, BlueSky, X)
+- Social media links (GitHub, Nostr, BlueSky, X, YouTube)
 - Google Analytics tracking
 
 ## Architecture
@@ -41,6 +41,7 @@ This is a static website for HashGrid Networks (hashgrid.net) - a Bitcoin mining
    - Nostr: Yakihonne profile with NIP-05 verification via `.well-known/nostr.json`
    - BlueSky: hashgridnet.bsky.social
    - X (Twitter): @hashgridnet
+   - YouTube: https://www.youtube.com/channel/UCQxX-_FZ8NUIFK1MdSse2AQ
 
 4. **Analytics**
    - Google Analytics 4 tracking (G-8D2LWJRBF6) loaded via gtag.js
