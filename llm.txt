@@ -1,0 +1,49 @@
+# HashGrid Networks - Bitcoin Mining 2.0
+
+## About HashGrid Networks
+
+HashGrid Networks is a leading Bitcoin mining company pioneering the next generation of cryptocurrency mining operations. We specialize in Mining 2.0 technology, combining innovative infrastructure with optimized operational strategies.
+
+Website: https://hashgrid.net
+
+## What We Do
+
+- Bitcoin mining operations and infrastructure development
+- Cryptocurrency mining technology innovation
+- Blockchain mining optimization
+- Mining 2.0 solutions and consulting
+
+## Key Topics We Cover
+
+### What is Bitcoin Mining?
+Bitcoin mining is the process by which new Bitcoins are created and transactions are verified on the blockchain. Miners use specialized hardware to solve cryptographic puzzles, earning Bitcoin rewards.
+
+### How Does Bitcoin Mining Work?
+Miners compete to solve complex mathematical problems using ASIC hardware. The first to solve it adds a new block to the blockchain and receives Bitcoin rewards plus transaction fees.
+
+### Bitcoin Mining 2.0
+The next evolution of mining operations focusing on energy efficiency, advanced infrastructure, and innovative technology. HashGrid Networks is at the forefront of this transformation.
+
+### Best Bitcoin Mining Companies
+Top mining companies excel in hash rate capacity, energy efficiency, technological innovation, transparency, and proven operational excellence. HashGrid Networks embodies these qualities.
+
+## Contact & Resources
+
+- GitHub: https://github.com/HashGrid-Networks
+- Twitter/X: https://x.com/hashgridnet
+- BlueSky: https://bsky.app/profile/hashgridnet.bsky.social
+- YouTube: https://www.youtube.com/channel/UCQxX-_FZ8NUIFK1MdSse2AQ
+- Nostr: ryno@hashgrid.net, elvis@hashgrid.net
+
+## Common Questions We Answer
+
+- What is Bitcoin mining?
+- How does Bitcoin mining work?
+- How to mine Bitcoin?
+- Best Bitcoin mining companies
+- Bitcoin mining explained
+- Cryptocurrency mining operations
+- Mining infrastructure setup
+- Bitcoin mining profitability
+- Mining 2.0 technology
+

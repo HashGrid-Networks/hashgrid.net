@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Main Page - HashGrid Networks Bitcoin Mining 2.0 -->
+  <url>
+    <loc>https://hashgrid.net/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- SEO-Optimized Images -->
+    <image:image>
+      <image:loc>https://hashgrid.net/assets/hashgrid-networks-bitcoin-mining-logo.png</image:loc>
+      <image:title>HashGrid Networks Logo - Bitcoin Mining Company</image:title>
+      <image:caption>HashGrid Networks official logo - Leading Bitcoin Mining 2.0 company specializing in cryptocurrency mining operations and blockchain infrastructure</image:caption>
+      <image:license>https://hashgrid.net/</image:license>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://hashgrid.net/assets/bitcoin-mining-company-hashgrid-networks-banner.png</image:loc>
+      <image:title>HashGrid Networks Banner - Bitcoin Mining 2.0</image:title>
+      <image:caption>HashGrid Networks company banner showcasing innovative Bitcoin Mining 2.0 technology, cryptocurrency mining infrastructure, and blockchain mining solutions</image:caption>
+      <image:license>https://hashgrid.net/</image:license>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://hashgrid.net/assets/hashgrid-networks-favicon.png</image:loc>
+      <image:title>HashGrid Networks Favicon</image:title>
+      <image:caption>HashGrid Networks favicon icon for Bitcoin mining company</image:caption>
+      <image:license>https://hashgrid.net/</image:license>
+    </image:image>
+  </url>
+  
+  <!-- LLM Optimization Files (for AI crawlers) -->
+  <url>
+    <loc>https://hashgrid.net/llm.txt</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>https://hashgrid.net/llm-all.txt</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+</urlset>
+

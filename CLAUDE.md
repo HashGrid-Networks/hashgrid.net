@@ -15,10 +15,15 @@ This is a static website for HashGrid Networks (hashgrid.net) - a Bitcoin mining
 
 **Static Site Structure:**
 - `index.html` - Single-page application containing all HTML, CSS, and JavaScript inline
-- `images/` - Static assets (logo.png, banner.png, favicon.png)
+- `assets/` - Static assets with SEO-optimized filenames (renamed from `images/`)
 - `.well-known/nostr.json` - Nostr NIP-05 identifier configuration for user verification
 - `worker.js` - Cloudflare Worker for serving NIP-05 with proper CORS headers
 - `wrangler.toml` - Cloudflare Worker configuration
+- `robots.txt` - Search engine crawler directives
+- `sitemap.xml` - XML sitemap for search engines
+- `llm.txt` - Summary file for AI crawlers
+- `llm-all.txt` - Comprehensive guide for AI crawlers
+- `CHANGELOG.md` - Change tracking and maintenance log
 
 **Key Technical Components:**
 
@@ -154,3 +159,111 @@ const NOSTR_IDENTIFIERS = {
 
 **Why Cloudflare Worker:**
 GitHub Pages and most static hosts don't allow fine-grained control over CORS headers, which are mandatory for NIP-05 verification in browser-based Nostr clients. The worker intercepts only `/.well-known/nostr.json` requests and proxies everything else.
+
+## SEO & GEO/LLM Optimization Requirements
+
+**CRITICAL: Always update SEO and GEO optimizations when making changes to the site.**
+
+### Before Every Git Commit - MANDATORY Steps:
+
+1. **Update CHANGELOG.md First**
+   - Document ALL changes in the changelog
+   - Use proper format: Added, Changed, Removed, Fixed, etc.
+   - Include date and descriptive entries
+   - Reference this in your commit message
+
+2. **Verify SEO Optimization** (if content/structure changed):
+   - [ ] Update `<title>` tag if page purpose changed
+   - [ ] Update `<meta name="description">` if content changed
+   - [ ] Update `<meta name="keywords">` if topics changed
+   - [ ] Update Open Graph tags (`og:title`, `og:description`, `og:image`)
+   - [ ] Update Twitter Card tags (`twitter:title`, `twitter:description`, `twitter:image`)
+   - [ ] Update JSON-LD structured data (Organization, VideoObject, WebSite schemas)
+   - [ ] Verify all image paths use `/assets/` directory (never `/images/`)
+   - [ ] Ensure image filenames are SEO-friendly (lowercase, hyphens, descriptive)
+
+3. **Update GEO/LLM Optimization** (if content changed):
+   - [ ] Update hidden `.geo-content` section in `index.html` if topics change
+   - [ ] Update `llm.txt` if summary information changes
+   - [ ] Update `llm-all.txt` if comprehensive guide content changes
+   - [ ] Ensure question-answer format is maintained
+   - [ ] Verify natural language matches user search queries
+
+4. **Update Sitemap & Robots** (if paths/content changed):
+   - [ ] Update `sitemap.xml` if new pages or images added
+   - [ ] Update `sitemap.xml` `lastmod` dates if content updated
+   - [ ] Update `robots.txt` if new paths need to be allowed/disallowed
+   - [ ] Verify sitemap includes all image assets with proper metadata
+
+5. **Asset Management**:
+   - [ ] ALL images must be in `/assets/` directory (not `/images/`)
+   - [ ] Image filenames must be SEO-friendly:
+     - Lowercase letters only
+     - Hyphens for word separation (not underscores)
+     - Descriptive, keyword-rich names
+     - Example: `bitcoin-mining-company-hashgrid-networks-banner.png`
+   - [ ] All HTML references must use `/assets/` path
+
+### SEO Optimization Checklist:
+
+When modifying `index.html`, always check:
+- Meta tags are current and accurate
+- Structured data (JSON-LD) reflects current content
+- Image references use `/assets/` directory
+- Open Graph and Twitter Card tags are updated
+- Canonical URL is correct
+- Heading hierarchy is proper (H1, H2, etc.)
+- Semantic HTML structure is maintained
+
+### GEO/LLM Optimization Checklist:
+
+When content changes:
+- Hidden `.geo-content` section answers relevant questions
+- Natural language matches how users search
+- LLM files (`llm.txt`, `llm-all.txt`) are current
+- Question-answer format is maintained
+- Brand is naturally integrated into answers
+
+### Maintenance Workflow:
+
+```
+1. Make code/content changes
+2. Update SEO meta tags if needed
+3. Update GEO/LLM content if needed
+4. Update robots.txt/sitemap.xml if needed
+5. **Update CHANGELOG.md** (REQUIRED before commit)
+6. Verify all asset paths use `/assets/`
+7. Test locally if possible
+8. Commit with reference to changelog
+```
+
+### File Naming Conventions:
+
+**Images/Assets:**
+- Directory: `/assets/` (always, never `/images/`)
+- Format: `descriptive-keyword-rich-name.png`
+- Use lowercase, hyphens, descriptive terms
+- Examples:
+  - ✅ `hashgrid-networks-bitcoin-mining-logo.png`
+  - ✅ `bitcoin-mining-company-hashgrid-networks-banner.png`
+  - ❌ `logo.png`
+  - ❌ `banner.PNG`
+  - ❌ `hashgrid_networks_logo.png`
+
+### SEO Best Practices Enforced:
+
+1. **Meta Tags**: Always include title, description, Open Graph, Twitter Cards
+2. **Structured Data**: JSON-LD schemas for Organization, WebSite, VideoObject
+3. **Asset Optimization**: SEO-friendly filenames, proper alt text, image sitemaps
+4. **Semantic HTML**: Proper heading hierarchy, semantic elements, ARIA labels
+5. **Content Discovery**: robots.txt and sitemap.xml must be current
+
+### GEO Best Practices Enforced:
+
+1. **Question-Based Content**: Content answers "What is...", "How does...", etc.
+2. **Natural Language**: Matches how users ask questions
+3. **Answer Format**: Structured for easy LLM extraction
+4. **LLM Files**: `llm.txt` and `llm-all.txt` must be current
+5. **Hidden Content**: `.geo-content` section accessible to crawlers but visually hidden
+
+**REMEMBER**: The changelog MUST be updated before every commit. This is a non-negotiable requirement for maintaining project documentation and SEO/GEO optimization tracking.

@@ -1,0 +1,92 @@
+# robots.txt for hashgrid.net
+# HashGrid Networks - Bitcoin Mining 2.0
+# Optimized for SEO and AI crawlers
+
+# Allow all search engine crawlers
+User-agent: *
+Allow: /
+Allow: /assets/
+
+# Allow AI crawlers and LLMs to access optimization files
+User-agent: GPTBot
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: CCBot
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: anthropic-ai
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: Claude-Web
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /llm.txt
+Allow: /llm-all.txt
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+Allow: /assets/
+Crawl-delay: 1
+
+User-agent: Googlebot-Image
+Allow: /assets/
+
+User-agent: Bingbot
+Allow: /
+Allow: /assets/
+Crawl-delay: 1
+
+# Allow asset indexing (images, etc.)
+Allow: /assets/
+
+# Disallow sensitive or unnecessary files
+Disallow: /.well-known/nostr.json
+Disallow: /worker.js
+Disallow: /wrangler.toml
+Disallow: /CLAUDE.md
+Disallow: /CLOUDFLARE_WORKER_SETUP.md
+Disallow: /session-work.md
+Disallow: /*.md$
+Disallow: /*.toml$
+Disallow: /*.js$
+
+# Sitemap location
+Sitemap: https://hashgrid.net/sitemap.xml
+
+# Crawl-delay for general crawlers (helps with server load)
+Crawl-delay: 1
+
